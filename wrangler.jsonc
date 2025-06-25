@@ -1,0 +1,9 @@
+{
+  "name": "simple-template",
+  "compatibility_date": "2025-01-28",
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS"
+  },
+  "main": "./functions/api/hello.js"
+} 
