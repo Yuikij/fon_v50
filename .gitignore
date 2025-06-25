@@ -54,4 +54,4 @@ yarn-error.log*
 # 部署信息
 deploy-info.json 
 .next/*
-out/trace
+out/*
