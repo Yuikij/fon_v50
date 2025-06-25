@@ -1,0 +1,50 @@
+{
+  "name": "fon-v50-nextjs",
+  "version": "1.0.0",
+  "description": "AI图片评分系统 - Next.js + Tailwind CSS版本",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "export": "next build",
+    "lint": "next lint",
+    "type-check": "tsc --noEmit",
+    "deploy": "npm run export && npx wrangler pages deploy out",
+    "dev:full": "npm run export && npx wrangler pages dev out --port 8080 --compatibility-date 2023-12-01",
+    "security-check": "node verify-security.js",
+    "clean": "if exist .next rmdir /s /q .next && if exist out rmdir /s /q out && if exist dist rmdir /s /q dist"
+  },
+  "dependencies": {
+    "next": "^14.0.4",
+    "react": "^18.2.0", 
+    "react-dom": "^18.2.0",
+    "lucide-react": "^0.294.0",
+    "clsx": "^2.0.0",
+    "tailwind-merge": "^2.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.5",
+    "@types/react": "^18.2.45",
+    "@types/react-dom": "^18.2.18",
+    "typescript": "^5.3.3",
+    "tailwindcss": "^3.3.6",
+    "postcss": "^8.4.32",
+    "autoprefixer": "^10.4.16",
+    "eslint": "^8.56.0",
+    "eslint-config-next": "^14.0.4"
+  },
+  "keywords": [
+    "ai",
+    "image-analysis", 
+    "nextjs",
+    "tailwindcss",
+    "typescript",
+    "cloudflare-pages"
+  ],
+  "author": "AI Rating System",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  }
+} 
