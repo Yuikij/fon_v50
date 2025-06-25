@@ -75,14 +75,51 @@ export default function Home() {
           <button
             onClick={callApi}
             disabled={loading}
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto disabled:bg-gray-200 disabled:cursor-not-allowed"
+            className="group relative rounded-full bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-semibold text-sm sm:text-base h-12 sm:h-14 px-6 sm:px-8 w-full sm:w-auto transition-all duration-200 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none shadow-lg hover:shadow-xl"
           >
-            {loading ? "Loading..." : "Test API"}
+            <span className="flex items-center justify-center gap-2">
+              {loading ? (
+                <>
+                  <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
+                    <circle
+                      className="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      strokeWidth="4"
+                      fill="none"
+                    />
+                    <path
+                      className="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                    />
+                  </svg>
+                  加载中...
+                </>
+              ) : (
+                <>
+                  <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M13 10V3L4 14h7v7l9-11h-7z"
+                    />
+                  </svg>
+                  测试 API
+                </>
+              )}
+            </span>
           </button>
           {apiResponse && (
-            <pre className="bg-black/[.05] dark:bg-white/[.06] p-4 rounded-lg text-sm/6 w-full sm:w-auto font-[family-name:var(--font-geist-mono)]">
-              <code>{apiResponse}</code>
-            </pre>
+            <div className="w-full sm:w-auto animate-fade-in">
+              <h3 className="text-sm font-semibold mb-2 text-gray-700 dark:text-gray-300">API 响应:</h3>
+              <pre className="bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900 border border-gray-200 dark:border-gray-700 p-4 rounded-lg text-sm leading-6 w-full font-[family-name:var(--font-geist-mono)] shadow-inner overflow-x-auto">
+                <code className="text-gray-800 dark:text-gray-200">{apiResponse}</code>
+              </pre>
+            </div>
           )}
         </div>
       </main>
