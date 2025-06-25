@@ -1,6 +1,26 @@
+"use client";
 import Image from "next/image";
+import { useState } from "react";
 
 export default function Home() {
+  const [apiResponse, setApiResponse] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const callApi = async () => {
+    setLoading(true);
+    setApiResponse("");
+    try {
+      const res = await fetch("/api/hello");
+      const data = await res.json();
+      setApiResponse(JSON.stringify(data, null, 2));
+    } catch (error) {
+      setApiResponse("Error calling API");
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
       <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
@@ -49,6 +69,21 @@ export default function Home() {
           >
             Read our docs
           </a>
+        </div>
+
+        <div className="flex flex-col gap-4 items-center sm:items-start w-full">
+          <button
+            onClick={callApi}
+            disabled={loading}
+            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto disabled:bg-gray-200 disabled:cursor-not-allowed"
+          >
+            {loading ? "Loading..." : "Test API"}
+          </button>
+          {apiResponse && (
+            <pre className="bg-black/[.05] dark:bg-white/[.06] p-4 rounded-lg text-sm/6 w-full sm:w-auto font-[family-name:var(--font-geist-mono)]">
+              <code>{apiResponse}</code>
+            </pre>
+          )}
         </div>
       </main>
       <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">

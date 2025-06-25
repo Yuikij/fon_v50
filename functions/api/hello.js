@@ -1,11 +1,8 @@
-// 简化的 Cloudflare Workers 函数
-// 从环境变量获取 hello 并返回给前端
+// functions/api/hello.js
 
 export default {
   async fetch(request, env, ctx) {
-    const url = new URL(request.url);
-    
-    // 处理 CORS 预检请求
+    // Handle CORS preflight requests
     if (request.method === 'OPTIONS') {
       return new Response(null, {
         status: 200,
@@ -17,24 +14,18 @@ export default {
         }
       });
     }
-    
-    // API 路由处理
-    if (url.pathname === '/api/hello') {
-      const hello = env.hello || 'Hello World from Workers!';
-      
-      return new Response(JSON.stringify({ 
-        message: hello,
-        timestamp: new Date().toISOString()
-      }), {
-        status: 200,
-        headers: {
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': '*'
-        }
-      });
-    }
-    
-    // 静态文件服务
-    return env.ASSETS.fetch(request);
+
+    const hello = env.hello || 'Hello World from Workers!';
+
+    return new Response(JSON.stringify({
+      message: hello,
+      timestamp: new Date().toISOString()
+    }), {
+      status: 200,
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*'
+      }
+    });
   }
 }; 
